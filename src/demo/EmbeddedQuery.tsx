@@ -21,7 +21,7 @@ export function EmbeddedQuery( {query}: any) {
         if (last_child) { container.removeChild(last_child) }
       }
       LookerEmbedSDK.init(host_url)
-      LookerEmbedSDK.createExploreWithUrl(`${host_url}/embed/query/${query.model}/${query.view}?qid=${query.client_id}&embed_domain=https%3A%2F%2Fmarketplace.dev.looker.com&sdk=2&sandboxed_host=true`)
+      LookerEmbedSDK.createExploreWithUrl(`${host_url}/embed/query/${query.model}/${query.view}?qid=${query.client_id}&embed_domain=${encodeURI(host_url)}&sdk=2&sandboxed_host=true`)
         .appendTo(container)
         .on('explore:run:complete', (e)=>{
           setLoading(false);

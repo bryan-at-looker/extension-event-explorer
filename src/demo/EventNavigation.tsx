@@ -3,6 +3,8 @@ import { Tabs, TabList, Tab, TabPanel, TabPanels, Flex, FlexItem, Box, Card, Hea
 import { EmbeddedQuery } from './EmbeddedQuery';
 import { FilterFlex } from './FilterFlex';
 import { PabsInsights } from './PabsInsights';
+import { NumberToColoredPercent } from './NumberToColoredPercent';
+import styled from 'styled-components';
 
 export function EventNavigation({
   setSelectedTab, 
@@ -14,7 +16,10 @@ export function EventNavigation({
   selected_color, 
   selected_tab, 
   result_tabs, 
-  last_api}: any
+  last_api,
+  result_field,
+  query_running
+}: any
 ) {
   let tabs = [<></>]
   let tab_panels = [<></>]
@@ -22,17 +27,22 @@ export function EventNavigation({
   if (result_tabs && result_tabs.length > 0) {
 
     tabs = result_tabs.map((e: any, i: number)=>{
-      const selected_style = (i==selected_tab) ? {borderBottomColor: selected_color} : {}
+      const selected_style = (i==selected_tab) ? {borderBottomColor: selected_color, } : {}
       if (!e.type) {
-        return <Tab 
+        return <StyledTab 
+          fontSize="small"
           style = {selected_style}
-          key={e[query_field]}>{e[query_field]}
-        </Tab>
+          key={e[query_field]}>
+      {`${e[query_field]} `}<NumberToColoredPercent 
+        val={e[result_field]}
+        query_running={query_running}
+      ></NumberToColoredPercent></StyledTab>
       } else {
-        return <Tab 
+        return <StyledTab 
+          fontSize="small"
           style = {selected_style}
           key={e[query_field]}>{e[query_field]}
-      </Tab>
+      </StyledTab>
       }
     })
 
@@ -102,3 +112,9 @@ const ComingSoon = <Box
     </Card>
 </Box>
 
+const StyledTab = styled(Tab)`
+width: 90px;
+white-space: pre;
+display: inline-flex;
+align-items: flex-end;
+`

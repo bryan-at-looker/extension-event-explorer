@@ -1,5 +1,9 @@
 export const IMAGE_URL = 'https://corporate.comcast.com/media/img/original/2019/02/corporate_Official-Comcast-Logo.png'
+export const EVENT_TAB_FIELD = 'events.event_type'
+export const EVENT_TAB_PIVOT = 'events.previous_period'
+export const EVENT_TAB_FILTER = 'events.previous_period_filter'
 export const QUERY_FIELD = 'events.event_type'
+export const QUERY_DATE_FILTER = 'events.previous_period_filter'
 export const DATE_FIELD = 'events.event_date'
 export const FILTERS = {[DATE_FIELD]: '28 days ago for 28 days'}
 
@@ -21,9 +25,17 @@ export const EXTRA_TABS = [
 export const EVENT_TYPE_QUERY = {
   model: "thelook-snowflake",
   view: "events",
-  fields: ["events.event_type"],
-  filters: {"events.event_date": "7 days ago for 7 days"},
-  sorts: ["events.event_type asc"]
+  fields: [
+    "events.previous_period",
+    "events.event_type",
+    "events.count"
+  ],
+  pivots: ["events.previous_period"],
+  "sorts": [
+    "events.event_type",
+    "events.previous_period"
+  ],
+  filters: {'events.event_date': '7 days ago for 7 days'}
 }
 
 export const QUERY = {
