@@ -5,6 +5,7 @@ import { FilterFlex } from './FilterFlex';
 import { PabsInsights } from './PabsInsights';
 import { NumberToColoredPercent } from './NumberToColoredPercent';
 import styled from 'styled-components';
+import { WebAnalyticsDashboard } from './WebAnalyticsDashboard';
 
 export function EventNavigation({
   setSelectedTab, 
@@ -70,6 +71,12 @@ export function EventNavigation({
         if (e[query_field] == 'PABS Insights') {
           return <TabPanel key={e[query_field]}>
             <PabsInsights last_api={last_api}></PabsInsights>
+          </TabPanel>
+        } else if ( e[query_field] == 'Web Analytics') {
+          return <TabPanel
+            key={e[query_field]}>
+            <WebAnalyticsDashboard
+            ></WebAnalyticsDashboard>
           </TabPanel>
         } else {
           return <TabPanel key={e[query_field]}>

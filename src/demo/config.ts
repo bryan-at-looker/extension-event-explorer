@@ -13,7 +13,7 @@ export const EXTRA_TABS = [
     type: -1
   },
   {
-    [QUERY_FIELD]: 'User Journey',
+    [QUERY_FIELD]: 'Web Analytics',
     type: 1
   },
   {
